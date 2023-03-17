@@ -22,10 +22,10 @@ We define, for the following work, an *Inappropriate Language* as a word or a se
 - Random Forest
     - Source: sklearn
     - Parameters: None
-- LSTM
+- LSTM (tf-idf + transformer encoder ?)
     - Source: Tensorflow
     - LSTM -> Dense layer (In -> Out (2))
-- Transformer
+- Transformer (normal + then fine tune bert with in-game chats)
     - Source: Tensorflow + Huggingface API
     - Distil Bert -> Dense layer (In -> Out (2))
 
