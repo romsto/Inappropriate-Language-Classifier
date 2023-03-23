@@ -41,9 +41,15 @@ Our dataset is a merge of multiple social media Hate Speech datasets.
     - `0` - Appropriate
     - `1` - Inappropriate
 
+### Construction
+
+
 ### Sources:
 - Hate Speech and Offensive Language (https://github.com/t-davidson/hate-speech-and-offensive-language/raw/master/data/labeled_data.csv) [tweets]
 - Measuring Hate Speech (https://huggingface.co/datasets/ucberkeley-dlab/measuring-hate-speech) [social media Reddit Twitter and other]
+- https://www.kaggle.com/competitions/detecting-insults-in-social-commentary/
+- Jibes and Delights https://github.com/ravsodhi/jibes-and-delights (Insults and Compliments targeting INDIVIDUALS) https://aclanthology.org/2021.woah-1.14.pdf
+- https://www.kaggle.com/competitions/jigsaw-toxic-comment-classification-challenge/ 
 
 ### Details:
 - English only
@@ -53,7 +59,7 @@ Our dataset is a merge of multiple social media Hate Speech datasets.
 
 1. Find datasets 
 2. Choose models
-3. Merging datasets to one dataset
+3. Merging datasets to one dataset and process data
 4. Build models
 5. Train models on dataset
 6. Test models on dataset
@@ -62,3 +68,14 @@ Our dataset is a merge of multiple social media Hate Speech datasets.
 
 7. Create small in-game chat dataset
 8. Test models on game chat datset
+
+Decision Tree	0,9459
+Random Forest	0,9477
+DT + Glove		0,9044
+RF + Glove		0,9409
+LSTM			0,9049
+LSTM + Glove	0,8871
+SVC + TF-IDF	0,8749
+
+Procédure d'évaluation
+Accuracy Recall F1 Time Size?

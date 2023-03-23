@@ -27,4 +27,4 @@ accuracy = clf.score(tockenize(X_validate), y_validate)
 # Print the accuracy
 print("Accuracy:", accuracy)
 
-print(clf.predict(tockenize(["You are shit", "You are in the shit", "You are an eye sore", "I don't like you", "I enjoy your company", "You are biatch", "You biiitch"])))
+# print(clf.predict(tockenize(["You are shit", "You are in the shit", "You are an eye sore", "I don't like you", "I enjoy your company", "You are biatch", "You biiitch"])))

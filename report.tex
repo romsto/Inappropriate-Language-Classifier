@@ -1,0 +1,107 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[english]{babel}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\usepackage{eso-pic}
+\pagestyle{fancy}
+\graphicspath{ {./images/} }
+
+% Margins
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.25in
+\setlength{\headheight}{13.6pt}
+\fancyheadoffset{0pt}
+
+
+\title{%
+    \begin{minipage}\linewidth
+        \centering\bfseries\sffamily
+        Machine Learning Project
+        \vskip 3pt
+        \large Classification of inappropriate language in game chats
+    \end{minipage}
+}
+
+\AddToShipoutPictureBG{
+    \AtPageLowerLeft{
+        \hspace{1cm}
+        \raisebox{1cm}{\includegraphics[width=2cm]{images/logoEcole.png}}%
+    }
+}
+
+\renewcommand{\headrulewidth}{1pt}
+\fancyhead[R]{\textbf{Classification of inappropriate language in game chats}} 
+\fancyhead[L]{\leftmark}
+\fancyhead[C]{}
+
+
+\author{ STORAI Romain, FAURE Benoit, MATHIEU Antoine }
+\date{\today}
+
+\begin{document}
+\maketitle	
+
+\tableofcontents
+\pagebreak
+
+\section{Introduction}
+
+\subsection{The goal of the project}
+Define and tackle the problem as a ML problem
+
+\subsection{What is Inappropriate Language?}
+
+\subsection{Extension}
+
+\pagebreak
+\section{Benchmarking}
+Define the methodology and the protocol of the experiment\\
+Also describe shortly how we did it
+
+\subsection{Dataset}
+
+\subsubsection{Details}
+
+Here we have to detail the columns, maybe give some examples.\\But most importantly: Describe and analyse the data!
+
+\subsubsection{Concerns?}
+We have to mention the data is from social media -> that's not what we want, etc etc
+
+\subsubsection{Sources}
+
+And how we merged them.
+
+\subsection{Models}
+
+\subsubsection{Preamble}
+We have to make a short review of NLP and explain shortly how ML and DL deal with text (tokenizer, embedder).\\Then we'll add that we also used pretrained embedders - GLoVE. 
+
+\subsubsection{Decision Tree}
+
+\subsubsection{Random Forest}
+
+\subsubsection{Support Vector Classifier}
+
+\subsubsection{Long Short Term Mermory (LSTM)}
+
+\subsubsection{Transformers (DistilBERT)?}
+
+\subsection{Metrics}
+Which metrics did we use?
+
+\pagebreak
+\section{Results}
+Make tables with all models and metrics.\\
+Add also how it performed with "new data"
+
+\pagebreak
+\section{Final Model}
+Motivate the selection of your final solution.\\
+Deliver that solution in the form of a predictive model that can be used on new input
+data.
+
+\end{document}
