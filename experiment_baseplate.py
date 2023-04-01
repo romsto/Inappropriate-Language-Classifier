@@ -15,6 +15,9 @@ def _prepare_data(dataframe: pd.DataFrame, split):
     dataframe['appro'] = 1 - dataframe["class"]
     dataframe['inappro'] = dataframe["class"]
 
+    # dataframe['text'].replace('', np.nan, inplace=True)
+    # dataframe.dropna(subset=['text'], inplace=True) 
+
     return (np.array(dataframe["text"]), np.array(dataframe[["appro", "inappro"]]) if split else np.array(dataframe["class"]))
 
 
@@ -32,7 +35,6 @@ def get_text_data():
 
 
 #---------- Vectorizing and Embedding ----------
-
 from sklearn.feature_extraction.text import CountVectorizer
 
 def get_split_count_vectorizer(dict=None):
@@ -69,7 +71,7 @@ def get_glove_model():
 
 from gensim.utils import simple_preprocess
 
-def get_split_glove_embedding(glove_source = 'pretrained/glove/glove.twitter.27B.200d.txt'): #Weights - https://nlp.stanford.edu/data/glove.twitter.27B.zip
+def get_split_glove_embedding(glove_source = 'pretrained/glove/glove.twitter.27B.200d.txt'):
     '''Get split data, 
     get glove model and make embeddings from data.
     '''
@@ -84,6 +86,8 @@ def get_split_glove_embedding(glove_source = 'pretrained/glove/glove.twitter.27B
             glove_model[word] = embedding
     print("Done loading GloVe model\n")
 
+    unkown_character = np.zeros( len( glove_model[ list( glove_model.keys() )[0] ] ) )
+
     #Load Data
     X_train, y_train, X_validate, y_validate, X_test, y_test = load_split_data()
 
@@ -94,14 +98,13 @@ def get_split_glove_embedding(glove_source = 'pretrained/glove/glove.twitter.27B
         for word in simple_preprocess(sentence):
             if word in glove_model:
                 sentence_embedding.append(glove_model[word])
-        if len(sentence_embedding) > 0:
-            return np.mean(sentence_embedding, axis=0)
-        else:
-            return np.zeros(200)
+            else:
+                sentence_embedding.append(unkown_character)
+        return sentence_embedding
 
-    X_train = np.array([get_sentence_embedding(sentence) for sentence in X_train])
-    X_validate = np.array([get_sentence_embedding(sentence) for sentence in X_validate])
-    X_test = np.array([get_sentence_embedding(sentence) for sentence in X_test])
+    X_train = [np.array(get_sentence_embedding(sentence)) for sentence in X_train]
+    X_validate = [np.array(get_sentence_embedding(sentence)) for sentence in X_validate]
+    X_test = [np.array(get_sentence_embedding(sentence)) for sentence in X_test]
 
     print("Done Embedding data")
     
