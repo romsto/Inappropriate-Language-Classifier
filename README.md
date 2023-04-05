@@ -1,4 +1,4 @@
-# Machine Learning Project
+# Classification of inappropriate language
 
 ## Introduction
 
