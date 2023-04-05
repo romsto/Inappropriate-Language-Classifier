@@ -2,3 +2,7 @@ __pycache__
 pretrained/
 bert-out/
 data/
+downloads/
+glove/
+save/
+final_model/
