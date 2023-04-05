@@ -100,11 +100,11 @@ def get_split_glove_embedding(glove_source = 'pretrained/glove/glove.twitter.27B
                 sentence_embedding.append(glove_model[word])
             else:
                 sentence_embedding.append(unkown_character)
-        return sentence_embedding
+        return sentence_embedding if (len(sentence_embedding) > 0) else [unkown_character]
 
-    X_train = [np.array(get_sentence_embedding(sentence)) for sentence in X_train]
-    X_validate = [np.array(get_sentence_embedding(sentence)) for sentence in X_validate]
-    X_test = [np.array(get_sentence_embedding(sentence)) for sentence in X_test]
+    X_train = [get_sentence_embedding(sentence) for sentence in X_train]
+    X_validate = [get_sentence_embedding(sentence) for sentence in X_validate]
+    X_test = [get_sentence_embedding(sentence) for sentence in X_test]
 
     print("Done Embedding data")
     
@@ -112,16 +112,17 @@ def get_split_glove_embedding(glove_source = 'pretrained/glove/glove.twitter.27B
 
 
 #------------------- Scoring -------------------
-
 from sklearn.metrics import accuracy_score
 from sklearn.metrics import precision_score
 from sklearn.metrics import recall_score
+from sklearn.metrics import fbeta_score
 
 def get_label(y):
     '''Get the associated label for the two classes outputed. Go from out size of 2 to 1'''
     return y[:, 0] < y[:, 1]
 
-def score(y, target_y):
-    y = get_label(y)
+def score(y, target_y, y_processed=False):
+    if not y_processed:
+        y = get_label(y)
     target_y = get_label(target_y)
-    return f"accuracy : {accuracy_score(target_y, y)} | precision : {precision_score(target_y, y)} | recall : {recall_score(target_y, y)}"
+    return f"accuracy : {accuracy_score(target_y, y)} | precision : {precision_score(target_y, y)} | recall : {recall_score(target_y, y)} | f2 : {fbeta_score(target_y, y, beta=2, average='weighted')}"
