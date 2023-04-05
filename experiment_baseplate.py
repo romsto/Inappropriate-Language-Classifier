@@ -121,8 +121,9 @@ def get_label(y):
     '''Get the associated label for the two classes outputed. Go from out size of 2 to 1'''
     return y[:, 0] < y[:, 1]
 
-def score(y, target_y, y_processed=False):
+def score(y, target_y, y_processed=False, target_y_processed=False):
     if not y_processed:
         y = get_label(y)
-    target_y = get_label(target_y)
+    if not target_y_processed:
+        target_y = get_label(target_y)
     return f"accuracy : {accuracy_score(target_y, y)} | precision : {precision_score(target_y, y)} | recall : {recall_score(target_y, y)} | f2 : {fbeta_score(target_y, y, beta=2, average='weighted')}"
